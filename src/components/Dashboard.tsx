@@ -112,12 +112,12 @@ export default function Dashboard() {
   const topSubjects = filteredSubjects.slice(0, 8);
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-3 sm:p-4 md:p-6 max-w-7xl mx-auto w-full">
       {/* Exclusion Banner if any */}
       {excludedStudents.length > 0 && (
-        <div className="alert alert-warning mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 border border-amber-200">
+        <div className="alert alert-warning mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3.5 sm:p-4 border border-amber-200">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-amber-100 rounded-lg text-amber-700">
+            <div className="p-2 bg-amber-100 rounded-lg text-amber-700 flex-shrink-0">
               <UserX className="w-5 h-5" />
             </div>
             <div>
@@ -131,7 +131,7 @@ export default function Dashboard() {
           </div>
           <button
             onClick={() => setActiveView('stage')}
-            className="btn btn-secondary text-xs py-1.5 px-3 bg-white hover:bg-amber-50 text-amber-900 border-amber-300"
+            className="btn btn-secondary text-xs py-1.5 px-3 bg-white hover:bg-amber-50 text-amber-900 border-amber-300 w-full sm:w-auto justify-center"
           >
             <Eye className="w-3.5 h-3.5" />
             <span>{isAr ? 'عرض الطلبة المستبعدين' : 'View Excluded Roster'}</span>
@@ -140,14 +140,16 @@ export default function Dashboard() {
       )}
 
       {/* Course Filter Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-3.5 bg-white border border-slate-200 rounded-xl shadow-2xs">
-        <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-indigo-600" />
-          <span className="text-xs font-bold text-slate-700">{t.filterByCourse}:</span>
+      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 mb-6 p-3 sm:p-3.5 bg-white border border-slate-200 rounded-xl shadow-2xs">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700">
+            <Filter className="w-4 h-4 text-indigo-600 flex-shrink-0" />
+            <span>{t.filterByCourse}:</span>
+          </div>
           <div className="flex flex-wrap gap-1 bg-slate-100 p-1 rounded-lg">
             <button
               type="button"
-              className={`text-xs px-3 py-1.5 rounded-md font-bold transition-all ${
+              className={`text-xs px-2.5 sm:px-3 py-1.5 rounded-md font-bold transition-all min-h-[34px] ${
                 courseFilter === 'all'
                   ? 'bg-indigo-600 text-white shadow-2xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -158,7 +160,7 @@ export default function Dashboard() {
             </button>
             <button
               type="button"
-              className={`text-xs px-3 py-1.5 rounded-md font-bold transition-all ${
+              className={`text-xs px-2.5 sm:px-3 py-1.5 rounded-md font-bold transition-all min-h-[34px] ${
                 courseFilter === 'الكورس الأول'
                   ? 'bg-blue-600 text-white shadow-2xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -169,7 +171,7 @@ export default function Dashboard() {
             </button>
             <button
               type="button"
-              className={`text-xs px-3 py-1.5 rounded-md font-bold transition-all ${
+              className={`text-xs px-2.5 sm:px-3 py-1.5 rounded-md font-bold transition-all min-h-[34px] ${
                 courseFilter === 'الكورس الثاني'
                   ? 'bg-purple-600 text-white shadow-2xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -180,7 +182,7 @@ export default function Dashboard() {
             </button>
             <button
               type="button"
-              className={`text-xs px-3 py-1.5 rounded-md font-bold transition-all ${
+              className={`text-xs px-2.5 sm:px-3 py-1.5 rounded-md font-bold transition-all min-h-[34px] ${
                 courseFilter === 'غير محدد'
                   ? 'bg-amber-600 text-white shadow-2xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -192,10 +194,10 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
           <button
             type="button"
-            className="btn btn-secondary btn-sm text-xs font-semibold border-indigo-200 text-indigo-700 bg-indigo-50/50 hover:bg-indigo-100/60"
+            className="btn btn-secondary btn-sm text-xs font-semibold border-indigo-200 text-indigo-700 bg-indigo-50/50 hover:bg-indigo-100/60 flex-1 sm:flex-none justify-center min-h-[36px]"
             onClick={() => setActiveView('assign-courses')}
           >
             <Layers className="w-3.5 h-3.5" />
@@ -203,7 +205,7 @@ export default function Dashboard() {
           </button>
           <button
             type="button"
-            className="btn btn-secondary btn-sm text-xs font-semibold border-slate-200 text-slate-700 hover:bg-slate-50"
+            className="btn btn-secondary btn-sm text-xs font-semibold border-slate-200 text-slate-700 hover:bg-slate-50 flex-1 sm:flex-none justify-center min-h-[36px]"
             onClick={() => setActiveView('assign-stages')}
           >
             <BookmarkCheck className="w-3.5 h-3.5 text-blue-600" />
@@ -213,26 +215,26 @@ export default function Dashboard() {
       </div>
 
       {/* Summary cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
         {summaryCards.map((card) => (
           <div key={card.label} className={`stat-card ${card.bg} border border-slate-100`}>
             <div className={`stat-icon ${card.iconBg}`}>
               <span className={card.text}>{card.icon}</span>
             </div>
-            <div>
-              <p className={`text-3xl font-extrabold ${card.text}`}>{card.value}</p>
-              <p className="text-sm font-medium text-slate-600 mt-0.5">{card.label}</p>
+            <div className="min-w-0 flex-1">
+              <p className={`text-2xl sm:text-3xl font-extrabold ${card.text} leading-tight`}>{card.value}</p>
+              <p className="text-xs sm:text-sm font-medium text-slate-600 mt-0.5 leading-snug">{card.label}</p>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 sm:gap-6">
         {/* Stage cards (Prioritizing Carryover Stage over enrolled stage) */}
         <div className="xl:col-span-2">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
             <div>
-              <h3 className="text-base font-extrabold text-slate-800">
+              <h3 className="text-base font-extrabold text-slate-800 leading-snug">
                 {isAr ? 'تصنيف الطلبة حسب المرحلة الدراسية لمواد التحميل (المرحلة المحمّل بها)' : 'Student Roster Grouped by Assigned Subject Stage'}
               </h3>
               <p className="text-xs text-slate-500 font-medium mt-0.5">
@@ -241,12 +243,12 @@ export default function Dashboard() {
                   : 'Carryover stage is primary; current student stage is secondary'}
               </p>
             </div>
-            <span className="text-xs text-indigo-700 font-bold bg-indigo-50 border border-indigo-200 px-2.5 py-1 rounded-full">
+            <span className="self-start sm:self-auto text-xs text-indigo-700 font-bold bg-indigo-50 border border-indigo-200 px-2.5 py-1 rounded-full whitespace-nowrap">
               {courseFilter === 'all' ? t.allCourses : isAr ? courseFilter : COURSE_EN[courseFilter]}
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {STAGE_ORDER.map((stage, idx) => {
               // Primary: Distinct students carrying subjects assigned to this stage (matching courseFilter)
               const carryingStudents = getStudentsCarryingStage(stage, courseFilter);
@@ -272,8 +274,8 @@ export default function Dashboard() {
                   {/* Top bar */}
                   <div className={`absolute top-0 start-0 end-0 h-1.5 rounded-t-xl ${colors.accent}`} />
 
-                  <div className="flex items-start justify-between mb-3 pt-1">
-                    <div>
+                  <div className="flex flex-wrap items-start justify-between gap-2 mb-3 pt-1">
+                    <div className="min-w-0">
                       <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
                         {isAr ? 'مرحلة التحميل' : 'Carryover Stage'}
                       </span>
@@ -283,7 +285,7 @@ export default function Dashboard() {
                     </div>
 
                     {/* Primary Badge: Carrying students count */}
-                    <div className="text-end">
+                    <div className="text-start sm:text-end">
                       <span className={`badge ${colors.bg} ${colors.text} border ${colors.border} font-extrabold text-xs px-2.5 py-1`}>
                         {carryingStudents.length} {t.carryingStudentsInStage}
                       </span>
@@ -304,7 +306,7 @@ export default function Dashboard() {
                     </span>
                   </div>
 
-                  <div className="flex gap-4 text-xs font-medium text-slate-600 mb-4 bg-slate-50/80 p-2 rounded-lg">
+                  <div className="flex flex-wrap gap-2 sm:gap-4 text-xs font-medium text-slate-600 mb-4 bg-slate-50/80 p-2 rounded-lg">
                     <span className="flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block" />
                       {oneSubj} {t.oneSubjectBadge}
@@ -423,7 +425,7 @@ export default function Dashboard() {
           <div className="mt-4 space-y-2">
             <button
               type="button"
-              className="btn btn-secondary w-full shadow-xs text-xs flex items-center justify-center gap-1.5 border-indigo-200 text-indigo-700 bg-indigo-50/50 hover:bg-indigo-100/60"
+              className="btn btn-secondary w-full shadow-xs text-xs flex items-center justify-center gap-1.5 border-indigo-200 text-indigo-700 bg-indigo-50/50 hover:bg-indigo-100/60 min-h-[42px]"
               onClick={() => setActiveView('assign-courses')}
             >
               <Layers className="w-4 h-4 text-indigo-600" />
@@ -431,14 +433,14 @@ export default function Dashboard() {
             </button>
             <button
               type="button"
-              className="btn btn-secondary w-full shadow-xs text-xs flex items-center justify-center gap-1.5 border-blue-200 text-blue-700 bg-blue-50/50 hover:bg-blue-100/60"
+              className="btn btn-secondary w-full shadow-xs text-xs flex items-center justify-center gap-1.5 border-blue-200 text-blue-700 bg-blue-50/50 hover:bg-blue-100/60 min-h-[42px]"
               onClick={() => setActiveView('assign-stages')}
             >
               <BookmarkCheck className="w-4 h-4 text-blue-600" />
               <span>{t.carryoverSubjectStageControl}</span>
             </button>
             <button
-              className="btn btn-primary w-full shadow-sm bg-blue-600 hover:bg-blue-700"
+              className="btn btn-primary w-full shadow-sm bg-blue-600 hover:bg-blue-700 min-h-[42px]"
               onClick={() => exportCompleteReport(parsedData, language, parseOptions?.columnFields, subjectStageMap, subjectCourseMap)}
             >
               <Download className="w-4 h-4" />

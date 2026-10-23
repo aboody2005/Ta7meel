@@ -46,42 +46,42 @@ export default function ValidationScreen() {
   const isRTL = language === 'ar';
 
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4">
-      <div className="card p-6 mb-6">
-        <div className="flex items-center gap-3 mb-6">
+    <div className="max-w-4xl mx-auto py-4 sm:py-8 px-3 sm:px-4">
+      <div className="card p-3.5 sm:p-6 mb-4 sm:mb-6">
+        <div className="flex items-center gap-3 mb-5 sm:mb-6">
           <div className={`stat-icon ${hasExclusions || hasMismatches ? 'bg-amber-50' : 'bg-green-50'}`}>
             {hasMismatches || hasExclusions ? (
-              <AlertTriangle className="w-6 h-6 text-amber-600" />
+              <AlertTriangle className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600" />
             ) : (
-              <CheckCircle className="w-6 h-6 text-green-600" />
+              <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
             )}
           </div>
-          <div>
-            <h2 className="text-xl font-bold text-slate-800">{t.validationTitle}</h2>
-            <p className="text-sm text-slate-500">
+          <div className="min-w-0">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-800 truncate">{t.validationTitle}</h2>
+            <p className="text-xs sm:text-sm text-slate-500">
               {includedStudents.length} {t.studentsCount} {t.includedBadge} • {parseStats.distinctSubjects} {t.subjectsCount}
             </p>
           </div>
         </div>
 
         {/* Inclusion Banner */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-          <div className="flex items-center gap-3 p-3.5 rounded-xl bg-emerald-50/80 border border-emerald-200">
-            <UserCheck className="w-6 h-6 text-emerald-600 flex-shrink-0" />
-            <div className="text-sm">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5 sm:mb-6">
+          <div className="flex items-center gap-3 p-3 sm:p-3.5 rounded-xl bg-emerald-50/80 border border-emerald-200">
+            <UserCheck className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600 flex-shrink-0" />
+            <div className="text-sm min-w-0">
               <span className="font-bold text-emerald-900">{t.includedStudents}: </span>
-              <span className="font-extrabold text-emerald-700 text-base">{includedStudents.length} {t.studentsCount}</span>
+              <span className="font-extrabold text-emerald-700 text-sm sm:text-base">{includedStudents.length} {t.studentsCount}</span>
               <p className="text-xs text-emerald-700 mt-0.5">
                 ({parseStats.oneCarryoverStudents} {t.oneSubjectStudents} • {parseStats.twoCarryoverStudents} {t.twoSubjectStudents} • {parseStats.zeroCarryoverStudents} {t.zeroSubjectStudents})
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 p-3.5 rounded-xl bg-rose-50/80 border border-rose-200">
-            <UserX className="w-6 h-6 text-rose-600 flex-shrink-0" />
-            <div className="text-sm">
+          <div className="flex items-center gap-3 p-3 sm:p-3.5 rounded-xl bg-rose-50/80 border border-rose-200">
+            <UserX className="w-5 h-5 sm:w-6 sm:h-6 text-rose-600 flex-shrink-0" />
+            <div className="text-sm min-w-0">
               <span className="font-bold text-rose-900">{t.excludedStudents}: </span>
-              <span className="font-extrabold text-rose-700 text-base">{excludedStudents.length} {t.studentsCount}</span>
+              <span className="font-extrabold text-rose-700 text-sm sm:text-base">{excludedStudents.length} {t.studentsCount}</span>
               <p className="text-xs text-rose-600 mt-0.5">
                 {isRTL ? 'محمّلون بأكثر من مادتين (> 2 مواد) وتم استبعادهم من التحليل الرئيسي' : 'Carrying > 2 subjects, excluded from main carryover roster'}
               </p>
@@ -90,18 +90,18 @@ export default function ValidationScreen() {
         </div>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3 mb-5 sm:mb-6">
           {stats.map((stat) => (
-            <div key={stat.label} className={`rounded-xl p-3.5 ${stat.bg}`}>
-              <p className={`text-2xl font-bold ${stat.color}`}>{stat.value}</p>
-              <p className="text-xs text-slate-600 mt-0.5">{stat.label}</p>
+            <div key={stat.label} className={`rounded-xl p-3 sm:p-3.5 ${stat.bg}`}>
+              <p className={`text-xl sm:text-2xl font-bold ${stat.color}`}>{stat.value}</p>
+              <p className="text-[11px] sm:text-xs text-slate-600 mt-0.5 leading-snug">{stat.label}</p>
             </div>
           ))}
         </div>
 
         {/* Discrepancy & Exclusion Inspection */}
         {hasWarnings && (
-          <div className="mb-6">
+          <div className="mb-5 sm:mb-6">
             <button
               className="flex items-center justify-between w-full p-3 rounded-xl bg-slate-100 hover:bg-slate-200/80 transition-colors"
               onClick={() => setShowWarnings(v => !v)}
@@ -181,20 +181,20 @@ export default function ValidationScreen() {
         )}
 
         {!hasWarnings && (
-          <div className="alert alert-success mb-6">
+          <div className="alert alert-success mb-5 sm:mb-6">
             <CheckCircle className="w-4 h-4 flex-shrink-0" />
-            <p>{t.noWarnings}</p>
+            <p className="text-xs sm:text-sm">{t.noWarnings}</p>
           </div>
         )}
 
         {/* Actions */}
-        <div className="flex flex-wrap gap-3">
-          <button className="btn btn-primary" onClick={proceed}>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <button className="btn btn-primary w-full sm:w-auto justify-center min-h-[42px]" onClick={proceed}>
             <span>{t.proceedToAnalysis}</span>
             <ArrowRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
           </button>
           <button
-            className="btn btn-secondary"
+            className="btn btn-secondary w-full sm:w-auto justify-center min-h-[42px]"
             onClick={() => setActiveView('dashboard')}
           >
             <Settings className="w-4 h-4" />

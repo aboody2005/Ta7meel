@@ -138,43 +138,43 @@ export default function ColumnMappingModal({ isOpen, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4"
       style={{ background: 'rgba(15,23,42,0.55)', backdropFilter: 'blur(4px)' }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div
-        className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl"
+        className="w-full max-w-2xl max-h-[94vh] sm:max-h-[90vh] overflow-y-auto rounded-xl sm:rounded-2xl shadow-2xl flex flex-col"
         style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
         dir={isRTL ? 'rtl' : 'ltr'}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 sticky top-0 bg-white z-10">
-          <div className="flex items-center gap-3">
-            <div className="stat-icon bg-blue-50">
-              <Columns className="w-5 h-5 text-blue-600" />
+        <div className="flex items-center justify-between px-3 sm:px-6 py-3 sm:py-4 border-b border-slate-200 sticky top-0 bg-white z-10">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div className="stat-icon bg-blue-50 w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0">
+              <Columns className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
             </div>
-            <div>
-              <h2 className="text-lg font-bold text-slate-800">
+            <div className="min-w-0">
+              <h2 className="text-base sm:text-lg font-bold text-slate-800 truncate">
                 {isRTL ? 'تخصيص تعيين الأعمدة' : 'Customize Column Mapping'}
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-[11px] sm:text-xs text-slate-500 truncate mt-0.5">
                 {isRTL
                   ? 'اختر الأعمدة المناسبة من ملف Excel وعدّل أسماء العرض'
                   : 'Choose the correct columns from the Excel file and edit display names'}
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
             <button
-              className="btn btn-secondary btn-sm text-xs flex items-center gap-1"
+              className="btn btn-secondary btn-sm text-xs flex items-center gap-1 px-2 sm:px-3 min-h-[36px]"
               onClick={resetToDefaults}
               title={isRTL ? 'إعادة تعيين الافتراضي' : 'Reset to defaults'}
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              {isRTL ? 'إعادة التعيين' : 'Reset'}
+              <span className="hidden xs:inline">{isRTL ? 'إعادة التعيين' : 'Reset'}</span>
             </button>
             <button
-              className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              className="p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center cursor-pointer"
               onClick={onClose}
               aria-label="Close"
             >
@@ -192,7 +192,7 @@ export default function ColumnMappingModal({ isOpen, onClose }: Props) {
         )}
 
         {/* Fields */}
-        <div className="p-6 space-y-4">
+        <div className="p-3.5 sm:p-6 space-y-3 sm:space-y-4">
           {fieldOrder.map(key => {
             const field = fields.find(f => f.key === key);
             if (!field) return null;
@@ -207,7 +207,7 @@ export default function ColumnMappingModal({ isOpen, onClose }: Props) {
                 style={{ background: field.enabled ? '#f8fafc' : '#f1f5f9', opacity: field.enabled ? 1 : 0.7 }}
               >
                 {/* Field header row */}
-                <div className="flex items-center gap-3 px-4 py-3 border-b border-slate-200/70">
+                <div className="flex items-center gap-3 px-3.5 sm:px-4 py-2.5 sm:py-3 border-b border-slate-200/70">
                   {/* Enable / Disable checkbox — required fields are always locked */}
                   <label className="flex items-center gap-2 cursor-pointer" title={role.required ? (isRTL ? 'هذا الحقل مطلوب ولا يمكن تعطيله' : 'Required field') : ''}>
                     <input
@@ -232,7 +232,7 @@ export default function ColumnMappingModal({ isOpen, onClose }: Props) {
 
                   {/* Preview toggle */}
                   <button
-                    className={`flex items-center gap-1 text-xs px-2.5 py-1 rounded-lg transition-colors ${
+                    className={`flex items-center gap-1 text-xs px-2.5 py-1 rounded-lg transition-colors min-h-[32px] ${
                       previewField === key
                         ? 'bg-blue-600 text-white'
                         : 'bg-slate-200 text-slate-600 hover:bg-slate-300'
@@ -246,7 +246,7 @@ export default function ColumnMappingModal({ isOpen, onClose }: Props) {
                 </div>
 
                 {/* Field body */}
-                <div className="px-4 py-3 space-y-3">
+                <div className="px-3.5 sm:px-4 py-3 space-y-3">
                   {/* Column selector */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
@@ -333,19 +333,21 @@ export default function ColumnMappingModal({ isOpen, onClose }: Props) {
         </div>
 
         {/* Footer actions */}
-        <div className="sticky bottom-0 bg-white border-t border-slate-200 px-6 py-4 flex items-center justify-between gap-3">
+        <div className="sticky bottom-0 bg-white border-t border-slate-200 px-3.5 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2 text-xs text-slate-500">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-            {isRTL
-              ? 'أسماء العرض ستُستخدم في جميع أرجاء التطبيق وتقارير Excel'
-              : 'Display names will be used throughout the app and in Excel reports'}
+            <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+            <span className="leading-tight">
+              {isRTL
+                ? 'أسماء العرض ستُستخدم في جميع أرجاء التطبيق وتقارير Excel'
+                : 'Display names will be used throughout the app and in Excel reports'}
+            </span>
           </div>
-          <div className="flex items-center gap-2">
-            <button className="btn btn-secondary btn-sm" onClick={onClose}>
+          <div className="flex items-center justify-end gap-2 w-full sm:w-auto">
+            <button className="btn btn-secondary btn-sm min-h-[38px] flex-1 sm:flex-initial justify-center" onClick={onClose}>
               {isRTL ? 'إلغاء' : 'Cancel'}
             </button>
             <button
-              className="btn btn-primary btn-sm"
+              className="btn btn-primary btn-sm min-h-[38px] flex-1 sm:flex-initial justify-center"
               onClick={handleApply}
               disabled={applying || !rawBuffer}
             >

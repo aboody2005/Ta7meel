@@ -289,10 +289,10 @@ export default function SubjectStageAssigner() {
   if (!parsedData) return null;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
+    <div className="p-3 sm:p-4 md:p-6 max-w-7xl mx-auto space-y-4 sm:space-y-6 w-full">
       {/* Top Header Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pb-2 border-b border-slate-200">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-200">
+        <div className="flex items-center gap-2 flex-wrap">
           <button
             type="button"
             className="btn btn-ghost btn-sm text-slate-500 hover:text-slate-800"
@@ -307,7 +307,7 @@ export default function SubjectStageAssigner() {
               <Layers className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-xl font-extrabold text-slate-900 leading-tight">
+              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">
                 {t.carryoverSubjectStageControl}
               </h2>
               <p className="text-xs text-slate-500 mt-0.5">
@@ -318,10 +318,10 @@ export default function SubjectStageAssigner() {
         </div>
 
         {/* Header Action Buttons */}
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
           <button
             type="button"
-            className="btn btn-secondary btn-sm flex items-center gap-1.5 text-slate-700 hover:text-red-700 hover:border-red-300"
+            className="btn btn-secondary btn-sm flex items-center gap-1.5 text-slate-700 hover:text-red-700 hover:border-red-300 flex-1 sm:flex-none justify-center min-h-[36px]"
             onClick={() => setConfirmRestoreModal(true)}
             title={t.restoreDefaults}
           >
@@ -331,7 +331,7 @@ export default function SubjectStageAssigner() {
 
           <button
             type="button"
-            className="btn btn-primary btn-sm flex items-center gap-1.5 shadow-sm font-bold relative"
+            className="btn btn-primary btn-sm flex items-center gap-1.5 shadow-sm font-bold relative flex-1 sm:flex-none justify-center min-h-[36px]"
             onClick={handleSaveAssignments}
           >
             <CheckCircle2 className="w-4 h-4" />
@@ -345,7 +345,7 @@ export default function SubjectStageAssigner() {
 
           <button
             type="button"
-            className="btn btn-success btn-sm flex items-center gap-1.5 font-medium"
+            className="btn btn-success btn-sm flex items-center gap-1.5 font-medium flex-1 sm:flex-none justify-center min-h-[36px]"
             onClick={() => exportReportBySubjectStage(parsedData, draftMap, language, columnFields)}
             disabled={allSubjects.length === 0}
           >
@@ -390,7 +390,7 @@ export default function SubjectStageAssigner() {
           </div>
           <button
             type="button"
-            className="btn btn-primary btn-sm text-xs font-bold shadow-xs flex items-center gap-1.5"
+            className="btn btn-primary btn-sm text-xs font-bold shadow-xs flex items-center gap-1.5 w-full sm:w-auto justify-center"
             onClick={handleSaveAssignments}
           >
             <CheckCircle2 className="w-3.5 h-3.5" />
@@ -400,30 +400,30 @@ export default function SubjectStageAssigner() {
       )}
 
       {/* Statistics Overview Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
-        <div className="card p-3.5 text-center border border-slate-200/80 bg-white">
-          <p className="text-2xl font-extrabold text-slate-800">{totalSubjectsCount}</p>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5">
+        <div className="card p-3 sm:p-3.5 text-center border border-slate-200/80 bg-white">
+          <p className="text-xl sm:text-2xl font-extrabold text-slate-800">{totalSubjectsCount}</p>
           <p className="text-xs text-slate-500 mt-1 font-medium">
             {isRTL ? 'إجمالي مواد التحميل المكتشفة' : 'Total Detected Subjects'}
           </p>
         </div>
 
-        <div className="card p-3.5 text-center border border-blue-100 bg-blue-50/40">
-          <p className="text-2xl font-extrabold text-blue-700">{defaultCount}</p>
+        <div className="card p-3 sm:p-3.5 text-center border border-blue-100 bg-blue-50/40">
+          <p className="text-xl sm:text-2xl font-extrabold text-blue-700">{defaultCount}</p>
           <p className="text-xs text-blue-800 mt-1 font-medium">
             {isRTL ? 'مواد بالتعيين الافتراضي' : 'Default Assignment'}
           </p>
         </div>
 
-        <div className="card p-3.5 text-center border border-amber-100 bg-amber-50/40">
-          <p className="text-2xl font-extrabold text-amber-700">{modifiedCount}</p>
+        <div className="card p-3 sm:p-3.5 text-center border border-amber-100 bg-amber-50/40">
+          <p className="text-xl sm:text-2xl font-extrabold text-amber-700">{modifiedCount}</p>
           <p className="text-xs text-amber-800 mt-1 font-medium">
             {isRTL ? 'مواد معدّلة يدوياً' : 'Manually Changed'}
           </p>
         </div>
 
-        <div className="card p-3.5 text-center border border-emerald-100 bg-emerald-50/40">
-          <p className="text-2xl font-extrabold text-emerald-700">{includedStudents.length}</p>
+        <div className="card p-3 sm:p-3.5 text-center border border-emerald-100 bg-emerald-50/40">
+          <p className="text-xl sm:text-2xl font-extrabold text-emerald-700">{includedStudents.length}</p>
           <p className="text-xs text-emerald-800 mt-1 font-medium">
             {isRTL ? 'إجمالي الطلبة المحمّلين' : 'Total Carrying Students'}
           </p>
@@ -431,7 +431,7 @@ export default function SubjectStageAssigner() {
       </div>
 
       {/* Professional Guidance Card */}
-      <div className="p-3.5 rounded-xl border border-blue-200 bg-blue-50/70 text-xs flex items-start gap-2.5 shadow-2xs">
+      <div className="p-3 sm:p-3.5 rounded-xl border border-blue-200 bg-blue-50/70 text-xs flex items-start gap-2.5 shadow-2xs">
         <BookOpen className="w-4 h-4 flex-shrink-0 text-blue-700 mt-0.5" />
         <div className="leading-relaxed">
           <span className="font-bold text-blue-950">
@@ -448,10 +448,10 @@ export default function SubjectStageAssigner() {
       {/* Main Control Panel Card */}
       <div className="card border border-slate-200/90 shadow-sm overflow-hidden bg-white">
         {/* Filters and Search Toolbar */}
-        <div className="p-4 border-b border-slate-100 bg-slate-50/80 space-y-3">
+        <div className="p-3 sm:p-4 border-b border-slate-100 bg-slate-50/80 space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             {/* Search Input */}
-            <div className="relative flex-1 min-w-[220px] max-w-md">
+            <div className="relative flex-1 min-w-[200px] w-full sm:max-w-md">
               <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
               <input
                 type="text"
@@ -464,13 +464,13 @@ export default function SubjectStageAssigner() {
             </div>
 
             {/* Filter by Assigned Stage */}
-            <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
               <div className="flex items-center gap-1.5">
                 <Filter className="w-3.5 h-3.5 text-slate-500" />
                 <span className="text-xs text-slate-600 font-medium">{t.filterByAssignedStage}:</span>
               </div>
               <select
-                className="select text-xs py-1.5 bg-white font-medium shadow-2xs"
+                className="select text-xs py-1.5 bg-white font-medium shadow-2xs flex-1 sm:flex-none"
                 value={stageFilter}
                 onChange={e => setStageFilter(e.target.value as typeof stageFilter)}
               >
@@ -482,7 +482,7 @@ export default function SubjectStageAssigner() {
 
               {/* Filter by Modification Status */}
               <select
-                className="select text-xs py-1.5 bg-white font-medium shadow-2xs"
+                className="select text-xs py-1.5 bg-white font-medium shadow-2xs flex-1 sm:flex-none"
                 value={statusFilter}
                 onChange={e => setStatusFilter(e.target.value as typeof statusFilter)}
               >
@@ -521,9 +521,9 @@ export default function SubjectStageAssigner() {
             </div>
 
             {/* Bulk Assign Controls */}
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 w-full sm:w-auto">
               <select
-                className="select text-xs py-1.5 bg-white font-medium min-w-[200px]"
+                className="select text-xs py-1.5 bg-white font-medium flex-1 sm:flex-none sm:min-w-[180px]"
                 value={bulkStage}
                 onChange={e => setBulkStage(e.target.value as AcademicStage | '')}
               >
@@ -535,7 +535,7 @@ export default function SubjectStageAssigner() {
 
               <button
                 type="button"
-                className="btn btn-secondary btn-sm text-xs font-semibold flex items-center gap-1 bg-white hover:bg-blue-50 text-blue-700 border-blue-200"
+                className="btn btn-secondary btn-sm text-xs font-semibold flex items-center gap-1 bg-white hover:bg-blue-50 text-blue-700 border-blue-200 flex-1 sm:flex-none justify-center"
                 disabled={!bulkStage || selectedSubjectNames.size === 0}
                 onClick={applyBulkAssign}
               >
@@ -547,8 +547,8 @@ export default function SubjectStageAssigner() {
         </div>
 
         {/* The Main Subject Stage Table */}
-        <div className="table-wrapper border-0 max-h-[520px] overflow-y-auto">
-          <table className="table">
+        <div className="table-wrapper border-0 max-h-[520px] overflow-y-auto overflow-x-auto w-full">
+          <table className="table min-w-[760px]">
             <thead>
               <tr>
                 <th style={{ width: '2.5rem' }} className="text-center">
@@ -775,8 +775,8 @@ export default function SubjectStageAssigner() {
         </div>
 
         {/* Preview Table */}
-        <div className="table-wrapper border border-slate-200 rounded-xl overflow-hidden mt-3 max-h-80 overflow-y-auto">
-          <table className="table">
+        <div className="table-wrapper border border-slate-200 rounded-xl overflow-hidden mt-3 max-h-80 overflow-y-auto overflow-x-auto w-full">
+          <table className="table min-w-[650px]">
             <thead>
               <tr>
                 <th style={{ width: '3.5rem' }}>#</th>

@@ -169,21 +169,23 @@ export default function SubjectExplorer() {
   if (!parsedData) return null;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-3 sm:p-4 md:p-6 max-w-7xl mx-auto w-full space-y-4 sm:space-y-5">
       {/* Top Header */}
-      <div className="flex flex-wrap items-center gap-3 mb-6">
-        <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-          <BookOpen className="w-5 h-5 text-blue-600" />
-          <span>{t.subjectExplorerTitle}</span>
-        </h2>
-        <span className="badge badge-blue font-bold text-xs py-1 px-3">
-          {allSubjects.length} {t.subjectsCount}
-        </span>
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-4 sm:mb-6">
+        <div className="flex items-center gap-2.5">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-800 flex items-center gap-2">
+            <BookOpen className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <span>{t.subjectExplorerTitle}</span>
+          </h2>
+          <span className="badge badge-blue font-bold text-xs py-1 px-2.5">
+            {allSubjects.length} {t.subjectsCount}
+          </span>
+        </div>
 
-        <div className="flex items-center gap-2 ms-auto">
+        <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
           <button
             type="button"
-            className="btn btn-secondary btn-sm text-xs flex items-center gap-1.5 border-indigo-200 text-indigo-700 bg-indigo-50/50 hover:bg-indigo-100/60"
+            className="btn btn-secondary btn-sm text-xs flex items-center gap-1.5 border-indigo-200 text-indigo-700 bg-indigo-50/50 hover:bg-indigo-100/60 flex-1 sm:flex-none justify-center min-h-[36px]"
             onClick={() => setActiveView('assign-courses')}
           >
             <Layers className="w-4 h-4 text-indigo-600" />
@@ -191,7 +193,7 @@ export default function SubjectExplorer() {
           </button>
           <button
             type="button"
-            className="btn btn-secondary btn-sm text-xs flex items-center gap-1.5 border-slate-200"
+            className="btn btn-secondary btn-sm text-xs flex items-center gap-1.5 border-slate-200 flex-1 sm:flex-none justify-center min-h-[36px]"
             onClick={() => setActiveView('assign-stages')}
           >
             <BookmarkCheck className="w-4 h-4 text-blue-600" />
@@ -200,7 +202,7 @@ export default function SubjectExplorer() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5">
         {/* Subject list panel */}
         <div className="lg:col-span-4 xl:col-span-3 min-w-0">
           <div className="card overflow-hidden border border-slate-200/80">
@@ -234,7 +236,7 @@ export default function SubjectExplorer() {
             </div>
 
             {/* Subject list */}
-            <div className="max-h-[62vh] overflow-y-auto">
+            <div className="max-h-[42vh] sm:max-h-[50vh] lg:max-h-[62vh] overflow-y-auto">
               {filteredSubjects.length === 0 ? (
                 <div className="empty-state py-8 text-center">
                   <p className="text-sm text-slate-500">{t.noResults}</p>
@@ -300,13 +302,13 @@ export default function SubjectExplorer() {
           ) : (
             <div className="space-y-4">
               {/* Subject header */}
-              <div className="card p-4 border border-slate-200/80">
-                <div className="flex flex-wrap items-start gap-3 justify-between mb-4">
+              <div className="card p-3.5 sm:p-4 border border-slate-200/80">
+                <div className="flex flex-col sm:flex-row sm:items-start gap-3 justify-between mb-4">
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                        <BookOpen className="w-5 h-5 text-blue-600" />
-                        <span>{activeSubject}</span>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <BookOpen className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                        <span className="break-words">{activeSubject}</span>
                       </h3>
                       {(() => {
                         const { assignedStage, assignedCourse, isModified } = activeSubjectInfo;
@@ -337,7 +339,7 @@ export default function SubjectExplorer() {
                     </p>
                   </div>
                   <button
-                    className="btn btn-success btn-sm font-bold flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700"
+                    className="btn btn-success btn-sm font-bold flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 w-full sm:w-auto justify-center min-h-[36px]"
                     onClick={() => {
                       exportSubjectReport(
                         activeSubject,
@@ -381,14 +383,14 @@ export default function SubjectExplorer() {
 
               {/* Stage distribution */}
               {stageDistribution.length > 0 && (
-                <div className="card p-4 border border-slate-200/80">
+                <div className="card p-3.5 sm:p-4 border border-slate-200/80">
                   <p className="text-xs font-bold text-slate-700 mb-3">{t.stageDistribution}</p>
                   <div className="space-y-2.5">
                     {stageDistribution.map(({ stage, count }) => {
                       const pct = matchingStudents.length > 0 ? Math.round((count / matchingStudents.length) * 100) : 0;
                       return (
-                        <div key={stage} className="flex items-center gap-3">
-                          <span className="text-xs font-medium text-slate-600 w-28 flex-shrink-0">
+                        <div key={stage} className="flex items-center gap-2.5 sm:gap-3">
+                          <span className="text-xs font-medium text-slate-600 w-24 sm:w-28 flex-shrink-0 truncate">
                             {isAr ? stage : STAGE_EN[stage]}
                           </span>
                           <div className="progress-bar flex-1 h-2">
@@ -416,8 +418,8 @@ export default function SubjectExplorer() {
                     <p className="font-medium text-slate-600 text-sm">{t.noStudentsForSubject}</p>
                   </div>
                 ) : (
-                  <div className="table-wrapper border-0 max-h-96 overflow-y-auto overflow-x-auto">
-                    <table className="table table-compact w-full">
+                  <div className="table-wrapper border-0 max-h-96 overflow-y-auto overflow-x-auto w-full">
+                    <table className="table table-compact w-full min-w-[700px]">
                       <thead>
                         <tr>
                           <th className="text-center" style={{ width: '4%' }}>{t.rowNum}</th>

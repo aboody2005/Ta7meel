@@ -85,20 +85,20 @@ export default function ParseSettings() {
 
   return (
     <>
-      <div className="max-w-3xl mx-auto py-8 px-4">
-        <div className="card p-6">
-          <div className="flex items-center gap-3 mb-6">
+      <div className="max-w-3xl mx-auto py-4 sm:py-8 px-3 sm:px-4">
+        <div className="card p-3.5 sm:p-6">
+          <div className="flex items-center gap-3 mb-5 sm:mb-6">
             <div className="stat-icon bg-blue-50">
               <Settings className="w-5 h-5 text-blue-600" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-800">{t.columnMapping}</h2>
-              <p className="text-sm text-slate-500">{t.columnMappingDesc}</p>
+              <h2 className="text-base sm:text-lg font-bold text-slate-800">{t.columnMapping}</h2>
+              <p className="text-xs sm:text-sm text-slate-500">{t.columnMappingDesc}</p>
             </div>
           </div>
 
           {/* Academic Condition Banner */}
-          <div className="alert alert-info mb-6 text-sm">
+          <div className="alert alert-info mb-5 sm:mb-6 text-xs sm:text-sm">
             <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-blue-600" />
             <div>
               <p className="font-semibold text-blue-900">{isRTL ? 'معايير الشمول الأكاديمي للتحميل' : 'Academic Carryover Inclusion Criteria'}</p>
@@ -107,8 +107,8 @@ export default function ParseSettings() {
           </div>
 
           {/* Column Mapping Button */}
-          <div className="mb-6 p-4 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200">
-            <div className="flex items-center justify-between gap-3">
+          <div className="mb-5 sm:mb-6 p-3.5 sm:p-4 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <p className="font-bold text-slate-800 text-sm">{isRTL ? 'تعيين الأعمدة المخصص' : 'Custom Column Mapping'}</p>
                 <p className="text-xs text-slate-600 mt-0.5">
@@ -127,7 +127,7 @@ export default function ParseSettings() {
                 )}
               </div>
               <button
-                className="btn btn-primary btn-sm whitespace-nowrap flex items-center gap-1.5"
+                className="btn btn-primary btn-sm whitespace-nowrap flex items-center justify-center gap-1.5 w-full sm:w-auto min-h-[38px]"
                 onClick={() => setModalOpen(true)}
               >
                 <Columns className="w-4 h-4" />
@@ -141,7 +141,7 @@ export default function ParseSettings() {
             <div className="mb-5">
               <label className="block text-sm font-semibold text-slate-700 mb-1.5">{t.worksheet}</label>
               <select
-                className="select"
+                className="select w-full"
                 value={localOpts.sheetIndex}
                 onChange={e => setLocalOpts(p => ({ ...p, sheetIndex: Number(e.target.value) }))}
               >
@@ -169,7 +169,7 @@ export default function ParseSettings() {
           </div>
 
           {/* Zero Carryover Option */}
-          <div className="mb-6 p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+          <div className="mb-5 sm:mb-6 p-3.5 rounded-xl bg-slate-50 border border-slate-200">
             <label className="flex items-center gap-2.5 cursor-pointer">
               <input
                 type="checkbox"
@@ -189,9 +189,9 @@ export default function ParseSettings() {
           {/* Separator checkboxes */}
           <div className="mb-6">
             <label className="block text-sm font-semibold text-slate-700 mb-2">{t.subjectSeparators}</label>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2.5 sm:gap-3">
               {SEPARATOR_OPTIONS.map(sep => (
-                <label key={sep.key} className="checkbox-label">
+                <label key={sep.key} className="checkbox-label text-xs sm:text-sm">
                   <input
                     type="checkbox"
                     checked={localOpts.subjectSeparators.includes(sep.value)}
@@ -204,9 +204,9 @@ export default function ParseSettings() {
           </div>
 
           {/* Actions */}
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <button
-              className="btn btn-primary"
+              className="btn btn-primary w-full sm:w-auto justify-center min-h-[42px]"
               onClick={applySettings}
               disabled={applying}
             >

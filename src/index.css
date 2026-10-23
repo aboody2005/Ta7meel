@@ -23,6 +23,13 @@
     padding: 0;
   }
 
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -221,8 +228,11 @@
   /* Table */
   .table-wrapper {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     border-radius: 0.75rem;
     border: 1px solid rgb(226 232 240);
+    width: 100%;
+    max-width: 100%;
   }
   .table {
     width: 100%;
@@ -256,11 +266,10 @@
 
   /* Table compact style for high-density tables */
   .table-compact {
-    table-layout: fixed;
     width: 100%;
   }
   .table-compact th {
-    padding: 0.55rem 0.35rem;
+    padding: 0.55rem 0.5rem;
     white-space: normal;
     font-size: 0.75rem;
     line-height: 1.25;
@@ -268,7 +277,7 @@
     letter-spacing: normal;
   }
   .table-compact td {
-    padding: 0.55rem 0.35rem;
+    padding: 0.55rem 0.5rem;
     font-size: 0.8rem;
     vertical-align: middle;
   }
@@ -278,19 +287,36 @@
     background: white;
     border-radius: 1rem;
     border: 1px solid rgb(226 232 240);
-    padding: 1.5rem;
+    padding: 1rem;
     display: flex;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 0.75rem;
+  }
+  @media (min-width: 640px) {
+    .stat-card {
+      padding: 1.25rem;
+      gap: 1rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .stat-card {
+      padding: 1.5rem;
+    }
   }
   .stat-icon {
-    width: 3rem;
-    height: 3rem;
+    width: 2.75rem;
+    height: 2.75rem;
     border-radius: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+  }
+  @media (min-width: 640px) {
+    .stat-icon {
+      width: 3rem;
+      height: 3rem;
+    }
   }
 
   /* Stage card */
@@ -298,11 +324,21 @@
     background: white;
     border-radius: 1.25rem;
     border: 1px solid rgb(226 232 240);
-    padding: 1.5rem;
+    padding: 1rem;
     cursor: pointer;
     transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
+  }
+  @media (min-width: 640px) {
+    .stage-card {
+      padding: 1.25rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .stage-card {
+      padding: 1.5rem;
+    }
   }
   .stage-card:hover {
     transform: translateY(-2px);
@@ -405,11 +441,16 @@
   .dropzone {
     border: 2px dashed rgb(148 163 184);
     border-radius: 1.25rem;
-    padding: 3rem 2rem;
+    padding: 1.75rem 1rem;
     text-align: center;
     cursor: pointer;
     transition: all 0.2s ease;
     background: rgb(248 250 252);
+  }
+  @media (min-width: 640px) {
+    .dropzone {
+      padding: 3rem 2rem;
+    }
   }
   .dropzone:hover,
   .dropzone.drag-over {
@@ -419,13 +460,17 @@
 
   /* Sidebar */
   .sidebar {
-    width: 16rem;
     min-height: 100vh;
     background: white;
     border-inline-end: 1px solid rgb(226 232 240);
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
+  }
+  @media (min-width: 1024px) {
+    .sidebar {
+      width: 16rem;
+    }
   }
 
   /* Progress bar */

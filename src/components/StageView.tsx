@@ -244,25 +244,29 @@ export default function StageView({ stage: stageProp }: Props) {
   if (!parsedData) return null;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-3 sm:p-4 md:p-6 max-w-7xl mx-auto w-full space-y-4 sm:space-y-5">
       {/* Header */}
-      <div className="flex flex-wrap items-center gap-3 mb-6">
-        <button
-          className="btn btn-ghost btn-sm"
-          onClick={() => setActiveView('dashboard')}
-        >
-          {isAr ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-          {t.dashboard}
-        </button>
-        <span className="text-slate-300">/</span>
-        <h2 className="text-xl font-extrabold text-slate-800">{stageTitle}</h2>
-        <span className="badge badge-blue ms-auto font-bold text-xs py-1 px-3">
-          {filtered.length} {t.studentsCount}
-        </span>
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-200">
+        <div className="flex items-center gap-2 flex-wrap">
+          <button
+            type="button"
+            className="btn btn-ghost btn-sm text-slate-600 hover:text-slate-900"
+            onClick={() => setActiveView('dashboard')}
+          >
+            {isAr ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+            {t.dashboard}
+          </button>
+          <span className="text-slate-300">/</span>
+          <h2 className="text-lg sm:text-xl font-extrabold text-slate-800">{stageTitle}</h2>
+          <span className="badge badge-blue font-bold text-xs py-1 px-2.5">
+            {filtered.length} {t.studentsCount}
+          </span>
+        </div>
+
         {stage && (
-          <div className="relative">
+          <div className="relative w-full sm:w-auto">
             <button
-              className="btn btn-success btn-sm font-bold flex items-center gap-1.5 shadow-sm bg-emerald-600 hover:bg-emerald-700"
+              className="btn btn-success btn-sm font-bold flex items-center gap-1.5 shadow-sm bg-emerald-600 hover:bg-emerald-700 w-full sm:w-auto justify-center min-h-[36px]"
               onClick={() => setShowExportModal(true)}
             >
               <Download className="w-4 h-4" />
@@ -271,17 +275,18 @@ export default function StageView({ stage: stageProp }: Props) {
 
             {/* Export Choice Modal / Dropdown */}
             {showExportModal && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-                <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 border border-slate-200 animate-fadeIn">
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-3 sm:p-4">
+                <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl max-w-md w-full p-4 sm:p-6 border border-slate-200 animate-fadeIn max-h-[92vh] overflow-y-auto">
                   <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
-                    <h3 className="font-extrabold text-slate-800 text-base flex items-center gap-2">
-                      <Download className="w-5 h-5 text-emerald-600" />
-                      <span>{t.exportStyledStageReport}</span>
+                    <h3 className="font-extrabold text-slate-800 text-sm sm:text-base flex items-center gap-2 min-w-0">
+                      <Download className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+                      <span className="truncate">{t.exportStyledStageReport}</span>
                     </h3>
                     <button
                       type="button"
-                      className="text-slate-400 hover:text-slate-600 p-1"
+                      className="text-slate-400 hover:text-slate-600 p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center cursor-pointer"
                       onClick={() => setShowExportModal(false)}
+                      aria-label="Close"
                     >
                       <X className="w-5 h-5" />
                     </button>
@@ -291,48 +296,48 @@ export default function StageView({ stage: stageProp }: Props) {
                     {t.exportStyledStageReportDesc}
                   </p>
 
-                  <div className="space-y-2.5 mb-6">
+                  <div className="space-y-2.5 mb-5 sm:mb-6">
                     <button
                       type="button"
-                      className="w-full text-start p-3.5 rounded-xl border border-indigo-200 bg-indigo-50/50 hover:bg-indigo-100/70 transition-colors flex items-center justify-between"
+                      className="w-full text-start p-3 sm:p-3.5 rounded-xl border border-indigo-200 bg-indigo-50/50 hover:bg-indigo-100/70 transition-colors flex items-center justify-between gap-2"
                       onClick={() => handleExportChoice('both')}
                     >
-                      <div>
-                        <p className="font-bold text-sm text-indigo-900">{t.bothCourses}</p>
-                        <p className="text-[11px] text-indigo-700 mt-0.5">{t.bothCoursesDesc}</p>
+                      <div className="min-w-0">
+                        <p className="font-bold text-xs sm:text-sm text-indigo-900">{t.bothCourses}</p>
+                        <p className="text-[11px] text-indigo-700 mt-0.5 line-clamp-2">{t.bothCoursesDesc}</p>
                       </div>
-                      <span className="badge badge-blue text-xs font-bold">{isAr ? 'النموذج الكامل' : 'Full'}</span>
+                      <span className="badge badge-blue text-[11px] sm:text-xs font-bold flex-shrink-0">{isAr ? 'النموذج الكامل' : 'Full'}</span>
                     </button>
 
                     <button
                       type="button"
-                      className="w-full text-start p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition-colors flex items-center justify-between"
+                      className="w-full text-start p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition-colors flex items-center justify-between gap-2"
                       onClick={() => handleExportChoice('first')}
                     >
-                      <div>
-                        <p className="font-bold text-sm text-slate-800">{t.firstCourseOnly}</p>
-                        <p className="text-[11px] text-slate-500 mt-0.5">{isAr ? 'تصدير جدول الكورس الأول فقط في أعلى الورقة' : 'Export First Course table only'}</p>
+                      <div className="min-w-0">
+                        <p className="font-bold text-xs sm:text-sm text-slate-800">{t.firstCourseOnly}</p>
+                        <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-2">{isAr ? 'تصدير جدول الكورس الأول فقط في أعلى الورقة' : 'Export First Course table only'}</p>
                       </div>
-                      <span className="badge bg-blue-100 text-blue-700 text-xs font-bold">{t.firstCourse}</span>
+                      <span className="badge bg-blue-100 text-blue-700 text-[11px] sm:text-xs font-bold flex-shrink-0">{t.firstCourse}</span>
                     </button>
 
                     <button
                       type="button"
-                      className="w-full text-start p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition-colors flex items-center justify-between"
+                      className="w-full text-start p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition-colors flex items-center justify-between gap-2"
                       onClick={() => handleExportChoice('second')}
                     >
-                      <div>
-                        <p className="font-bold text-sm text-slate-800">{t.secondCourseOnly}</p>
-                        <p className="text-[11px] text-slate-500 mt-0.5">{isAr ? 'تصدير جدول الكورس الثاني فقط في أعلى الورقة' : 'Export Second Course table only'}</p>
+                      <div className="min-w-0">
+                        <p className="font-bold text-xs sm:text-sm text-slate-800">{t.secondCourseOnly}</p>
+                        <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-2">{isAr ? 'تصدير جدول الكورس الثاني فقط في أعلى الورقة' : 'Export Second Course table only'}</p>
                       </div>
-                      <span className="badge bg-purple-100 text-purple-700 text-xs font-bold">{t.secondCourse}</span>
+                      <span className="badge bg-purple-100 text-purple-700 text-[11px] sm:text-xs font-bold flex-shrink-0">{t.secondCourse}</span>
                     </button>
                   </div>
 
                   <div className="flex justify-end">
                     <button
                       type="button"
-                      className="btn btn-ghost btn-sm"
+                      className="btn btn-ghost btn-sm min-h-[38px] w-full sm:w-auto justify-center"
                       onClick={() => setShowExportModal(false)}
                     >
                       {t.cancel}
@@ -346,13 +351,13 @@ export default function StageView({ stage: stageProp }: Props) {
       </div>
 
       {/* Classification Mode Toggle */}
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-4 p-3 bg-white border border-slate-200/80 rounded-xl shadow-2xs">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 mb-4 p-3 bg-white border border-slate-200/80 rounded-xl shadow-2xs">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
           <span className="text-xs font-bold text-slate-700">{isRTL ? 'أساس التصنيف:' : 'Classification basis:'}</span>
-          <div className="flex gap-1.5 bg-slate-100 p-1 rounded-lg">
+          <div className="flex flex-wrap gap-1 bg-slate-100 p-1 rounded-lg w-full sm:w-auto">
             <button
               type="button"
-              className={`text-xs px-2.5 py-1 rounded-md font-semibold transition-all ${
+              className={`text-xs px-2.5 py-1.5 rounded-md font-semibold transition-all min-h-[32px] ${
                 classificationMode === 'by-subject-stage'
                   ? 'bg-blue-600 text-white shadow-2xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -363,7 +368,7 @@ export default function StageView({ stage: stageProp }: Props) {
             </button>
             <button
               type="button"
-              className={`text-xs px-2.5 py-1 rounded-md font-semibold transition-all ${
+              className={`text-xs px-2.5 py-1.5 rounded-md font-semibold transition-all min-h-[32px] ${
                 classificationMode === 'by-student-stage'
                   ? 'bg-blue-600 text-white shadow-2xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -375,10 +380,10 @@ export default function StageView({ stage: stageProp }: Props) {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 w-full md:w-auto">
           <button
             type="button"
-            className="btn btn-ghost btn-sm text-xs text-indigo-700 hover:bg-indigo-50"
+            className="btn btn-ghost btn-sm text-xs text-indigo-700 hover:bg-indigo-50 flex-1 sm:flex-none justify-center min-h-[32px]"
             onClick={() => setActiveView('assign-courses')}
           >
             <Layers className="w-3.5 h-3.5" />
@@ -386,7 +391,7 @@ export default function StageView({ stage: stageProp }: Props) {
           </button>
           <button
             type="button"
-            className="btn btn-ghost btn-sm text-xs text-blue-700 hover:bg-blue-50"
+            className="btn btn-ghost btn-sm text-xs text-blue-700 hover:bg-blue-50 flex-1 sm:flex-none justify-center min-h-[32px]"
             onClick={() => setActiveView('assign-stages')}
           >
             <span>{t.carryoverSubjectStageControl}</span>
@@ -396,8 +401,8 @@ export default function StageView({ stage: stageProp }: Props) {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="card p-4 mb-5 border border-slate-200/80">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="card p-3 sm:p-4 mb-4 sm:mb-5 border border-slate-200/80">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
           {/* Search */}
           <div className="relative">
             <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -459,7 +464,7 @@ export default function StageView({ stage: stageProp }: Props) {
         </div>
 
         {/* Sort shortcuts */}
-        <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-slate-100">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-3 pt-3 border-t border-slate-100">
           <span className="text-xs text-slate-500 font-semibold">{t.sortBy}:</span>
           {[
             { field: 'original' as const, label: t.defaultOrder },
@@ -470,7 +475,7 @@ export default function StageView({ stage: stageProp }: Props) {
             <button
               key={opt.field}
               type="button"
-              className={`btn btn-sm text-xs ${sortField === opt.field ? 'btn-primary' : 'btn-secondary'}`}
+              className={`btn btn-sm text-xs ${sortField === opt.field ? 'btn-primary' : 'btn-secondary'} min-h-[30px]`}
               onClick={() => toggleSort(opt.field)}
             >
               <span>{opt.label}</span>
@@ -481,8 +486,8 @@ export default function StageView({ stage: stageProp }: Props) {
       </div>
 
       {/* Table - Columns aligned with Reference Template */}
-      <div className="table-wrapper mb-4 border border-slate-200/80 shadow-sm rounded-xl overflow-hidden bg-white">
-        <table className="table w-full">
+      <div className="table-wrapper mb-4 border border-slate-200/80 shadow-sm rounded-xl overflow-x-auto w-full bg-white">
+        <table className="table w-full min-w-[760px]">
           <thead>
             <tr className="bg-slate-100/90 text-slate-800 border-b border-slate-200">
               <th style={{ width: '3.5rem' }} className="text-center">{t.rowNum}</th>
@@ -639,15 +644,15 @@ export default function StageView({ stage: stageProp }: Props) {
       </div>
 
       {/* Pagination */}
-      <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600">
-        <div>
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600">
+        <div className="text-center sm:text-start">
           {t.showingOf
             .replace('{from}', String(Math.min((page - 1) * pageSize + 1, filtered.length)))
             .replace('{to}', String(Math.min(page * pageSize, filtered.length)))
             .replace('{total}', String(filtered.length))}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center justify-center gap-2">
           <div className="flex items-center gap-1">
             <span className="text-slate-500">{t.perPage}:</span>
             <select
@@ -661,18 +666,18 @@ export default function StageView({ stage: stageProp }: Props) {
 
           <div className="flex gap-1">
             <button
-              className="btn btn-secondary btn-sm"
+              className="btn btn-secondary btn-sm min-h-[34px]"
               disabled={page <= 1}
               onClick={() => setPage(p => p - 1)}
             >
               {isAr ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronLeft className="w-3.5 h-3.5" />}
               <span>{t.previous}</span>
             </button>
-            <span className="px-2 py-1 font-bold text-slate-700">
+            <span className="px-2 py-1 font-bold text-slate-700 flex items-center">
               {page} / {totalPages}
             </span>
             <button
-              className="btn btn-secondary btn-sm"
+              className="btn btn-secondary btn-sm min-h-[34px]"
               disabled={page >= totalPages}
               onClick={() => setPage(p => p + 1)}
             >

@@ -83,15 +83,15 @@ export default function FileUpload() {
   }, [processFile]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
+    <div className="flex flex-col items-center justify-center min-h-[60vh] px-3 sm:px-4 py-6 sm:py-10">
       <div className="w-full max-w-2xl">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-blue-50 mb-4 shadow-sm border border-blue-100">
-            <FileSpreadsheet className="w-10 h-10 text-blue-600" />
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-blue-50 mb-3 sm:mb-4 shadow-sm border border-blue-100">
+            <FileSpreadsheet className="w-8 h-8 sm:w-10 sm:h-10 text-blue-600" />
           </div>
-          <h2 className="text-2xl font-bold text-slate-800 mb-2">{t.uploadTitle}</h2>
-          <p className="text-slate-500 text-sm">{t.uploadFormats}</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2">{t.uploadTitle}</h2>
+          <p className="text-slate-500 text-xs sm:text-sm">{t.uploadFormats}</p>
         </div>
 
         {/* Drop zone */}
@@ -115,15 +115,15 @@ export default function FileUpload() {
           />
           {isProcessing ? (
             <div className="flex flex-col items-center gap-3">
-              <div className="spinner w-10 h-10 border-4" />
-              <p className="text-blue-600 font-semibold">{t.processing}</p>
+              <div className="spinner w-8 h-8 sm:w-10 sm:h-10 border-4" />
+              <p className="text-blue-600 font-semibold text-sm sm:text-base">{t.processing}</p>
             </div>
           ) : (
-            <div className="flex flex-col items-center gap-3">
-              <Upload className="w-12 h-12 text-slate-400" />
-              <p className="text-lg font-semibold text-slate-600">{t.uploadDesc}</p>
-              <p className="text-sm text-slate-400">{t.uploadFormats}</p>
-              <button className="btn btn-primary mt-2" type="button">
+            <div className="flex flex-col items-center gap-2.5 sm:gap-3 text-center">
+              <Upload className="w-10 h-10 sm:w-12 sm:h-12 text-slate-400" />
+              <p className="text-base sm:text-lg font-semibold text-slate-600">{t.uploadDesc}</p>
+              <p className="text-xs sm:text-sm text-slate-400">{t.uploadFormats}</p>
+              <button className="btn btn-primary mt-2 min-h-[42px] px-5 text-sm" type="button">
                 <Upload className="w-4 h-4" />
                 {t.uploadFile}
               </button>
@@ -132,7 +132,7 @@ export default function FileUpload() {
         </div>
 
         {/* Demo / Sample Options */}
-        <div className="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="mt-5 sm:mt-6 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="text-center sm:text-start">
             <p className="text-sm font-medium text-slate-700">{t.orTryDemo}</p>
             <p className="text-xs text-slate-500 mt-0.5">
@@ -141,23 +141,23 @@ export default function FileUpload() {
                 : '28 students • 5 stages • Comprehensive carryover roster data'}
             </p>
           </div>
-          <div className="flex items-center gap-2 flex-wrap justify-center">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             <button
               type="button"
               onClick={handleLoadSample}
               disabled={isProcessing}
-              className="btn btn-secondary text-xs py-2 px-3 flex items-center gap-1.5 border-blue-200 text-blue-700 bg-white hover:bg-blue-50"
+              className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-center gap-1.5 border-blue-200 text-blue-700 bg-white hover:bg-blue-50 min-h-[40px]"
             >
-              <Sparkles className="w-4 h-4 text-blue-600" />
+              <Sparkles className="w-4 h-4 text-blue-600 flex-shrink-0" />
               <span>{t.loadSampleData}</span>
             </button>
             <a
               href="/sample_students.xlsx"
               download="sample_students.xlsx"
               onClick={e => e.stopPropagation()}
-              className="btn btn-secondary text-xs py-2 px-3 flex items-center gap-1.5 bg-white text-slate-600 hover:bg-slate-100"
+              className="btn btn-secondary text-xs py-2 px-3 flex items-center justify-center gap-1.5 bg-white text-slate-600 hover:bg-slate-100 min-h-[40px]"
             >
-              <Download className="w-3.5 h-3.5" />
+              <Download className="w-3.5 h-3.5 flex-shrink-0" />
               <span>{t.downloadSample}</span>
             </a>
           </div>

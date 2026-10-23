@@ -5,7 +5,7 @@
 import React, { useState } from 'react';
 import {
   LayoutDashboard, GraduationCap, BookOpen, BookmarkCheck,
-  Download, ShieldCheck, Upload, RotateCcw, Globe, AlertTriangle, Layers
+  Download, ShieldCheck, Upload, RotateCcw, Globe, AlertTriangle, Layers, X
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { translations } from '../i18n/translations';
@@ -28,7 +28,12 @@ const NAV_ITEMS: NavItem[] = [
   { view: 'validation', icon: <ShieldCheck className="w-5 h-5" />, labelKey: 'validation', requiresData: true },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  mobileOpen?: boolean;
+  onCloseMobile?: () => void;
+}
+
+export default function Sidebar({ mobileOpen = false, onCloseMobile }: SidebarProps) {
   const {
     language, setLanguage, activeView, setActiveView,
     parsedData, resetSession, fileName, hasUnsavedChanges,
@@ -45,6 +50,7 @@ export default function Sidebar() {
     } else {
       setActiveView(view as ActiveView);
     }
+    onCloseMobile?.();
   };
 
   const handleNav = (view: NavItem['view']) => {
@@ -73,21 +79,48 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="sidebar">
-      {/* Logo */}
-      <div className="p-5 border-b border-slate-100">
-        <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center flex-shrink-0">
-            <GraduationCap className="w-5 h-5 text-white" />
+    <>
+      {/* Mobile Backdrop */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-xs lg:hidden transition-opacity duration-200"
+          onClick={onCloseMobile}
+          aria-hidden="true"
+        />
+      )}
+
+      <aside
+        className={`
+          sidebar
+          fixed top-0 bottom-0 z-50 w-72 max-w-[85vw] h-full shadow-2xl transition-transform duration-300 ease-in-out
+          ${isAr ? 'right-0' : 'left-0'}
+          ${mobileOpen ? 'translate-x-0' : (isAr ? 'translate-x-full' : '-translate-x-full')}
+          lg:static lg:translate-x-0 lg:w-64 lg:shadow-none lg:z-auto
+        `}
+      >
+        {/* Logo & Mobile Close */}
+        <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center flex-shrink-0 text-white">
+              <GraduationCap className="w-5 h-5" />
+            </div>
+            <div className="min-w-0">
+              <p className="font-bold text-slate-800 text-sm leading-tight truncate">{t.appName}</p>
+              <p className="text-xs text-slate-400 leading-tight mt-0.5 truncate">
+                {isAr ? 'كلية الصيدلة' : 'College of Pharmacy'}
+              </p>
+            </div>
           </div>
-          <div className="min-w-0">
-            <p className="font-bold text-slate-800 text-sm leading-tight">{t.appName}</p>
-            <p className="text-xs text-slate-400 leading-tight mt-0.5 truncate">
-              {isAr ? 'كلية الصيدلة' : 'College of Pharmacy'}
-            </p>
-          </div>
+
+          <button
+            type="button"
+            className="lg:hidden p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center cursor-pointer"
+            onClick={onCloseMobile}
+            aria-label={isAr ? 'إغلاق القائمة' : 'Close navigation menu'}
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
-      </div>
 
       {/* File info */}
       {fileName && (
@@ -194,5 +227,6 @@ export default function Sidebar() {
         </div>
       )}
     </aside>
+    </>
   );
 }
